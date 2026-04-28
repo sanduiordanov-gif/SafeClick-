@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeClick - Educație în Siguranța Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- LOGIN MODAL -->
+  <div id="login-overlay" class="modal-overlay hidden">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeLogin()">✕</button>
+      <div class="modal-logo">🛡️ SafeClick</div>
+      <div id="modal-tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Autentificare</button>
+        <button class="tab-btn" onclick="switchTab('register')">Cont Nou</button>
+      </div>
+
+      <div id="tab-login">
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="exemplu@email.com" id="login-email"/>
+        </div>
+        <div class="form-group">
+          <label>Parolă</label>
+          <input type="password" placeholder="••••••••" id="login-pass"/>
+        </div>
+        <button class="modal-btn" onclick="doLogin()">Intră în cont</button>
+        <div class="modal-divider">sau</div>
+        <button class="modal-btn-ghost" onclick="doGuestLogin()">🚀 Continuă ca Vizitator</button>
+      </div>
+
+      <div id="tab-register" class="hidden">
+        <div class="form-group">
+          <label>Nume complet</label>
+          <input type="text" placeholder="Numele tău" id="reg-name"/>
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="exemplu@email.com" id="reg-email"/>
+        </div>
+        <div class="form-group">
+          <label>Parolă</label>
+          <input type="password" placeholder="Minim 8 caractere" id="reg-pass"/>
+        </div>
+        <button class="modal-btn" onclick="doRegister()">Creează cont</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI CHAT WIDGET -->
+  <div id="ai-widget">
+    <div id="ai-chat-box" class="hidden">
+      <div class="ai-chat-header">
+        <span>🤖 SafeBot AI</span>
+        <button onclick="toggleChat()">✕</button>
+      </div>
+      <div class="ai-chat-messages" id="ai-messages">
+        <div class="ai-msg bot">Salut! Sunt SafeBot, asistentul tău de securitate online. Cum te pot ajuta? 🛡️</div>
+      </div>
+      <div class="ai-chat-input">
+        <input type="text" id="ai-input" placeholder="Întreabă ceva despre securitate..." onkeydown="if(event.key==='Enter')sendAIMessage()"/>
+        <button onclick="sendAIMessage()">▶</button>
+      </div>
+    </div>
+    <button id="ai-fab" onclick="toggleChat()">
+      <span id="ai-fab-icon">🤖</span>
+      <span class="ai-fab-label">SafeBot</span>
+    </button>
+  </div>
+
+  <!-- HEADER -->
+  <header id="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" onclick="navigateTo('home'); return false;">
+        <span class="logo-icon">🛡️</span>
+        <span class="logo-text">SafeClick</span>
+      </a>
+      <nav id="main-nav">
+        <a href="#" onclick="navigateTo('home'); return false;" data-page="home">Acasă</a>
+        <a href="#" onclick="navigateTo('amenintari'); return false;" data-page="amenintari">Amenințări</a>
+        <a href="#" onclick="navigateTo('protectie'); return false;" data-page="protectie">Protecție</a>
+        <a href="#" onclick="navigateTo('greseli'); return false;" data-page="greseli">Greșeli</a>
+        <a href="#" onclick="navigateTo('ghiduri'); return false;" data-page="ghiduri">Ghiduri</a>
+        <a href="#" onclick="navigateTo('contact'); return false;" data-page="contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <div id="user-pill" class="hidden">
+          <span id="user-name-display">👤</span>
+          <button class="logout-btn" onclick="doLogout()">Ieșire</button>
+        </div>
+        <button class="login-btn" id="login-btn-header" onclick="openLogin()">🔐 Autentificare</button>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#" onclick="navigateTo('home'); toggleMenu(); return false;">Acasă</a>
+      <a href="#" onclick="navigateTo('amenintari'); toggleMenu(); return false;">Amenințări</a>
+      <a href="#" onclick="navigateTo('protectie'); toggleMenu(); return false;">Protecție</a>
+      <a href="#" onclick="navigateTo('greseli'); toggleMenu(); return false;">Greșeli</a>
+      <a href="#" onclick="navigateTo('ghiduri'); toggleMenu(); return false;">Ghiduri</a>
+      <a href="#" onclick="navigateTo('contact'); toggleMenu(); return false;">Contact</a>
+      <a href="#" onclick="openLogin(); toggleMenu(); return false;">🔐 Autentificare</a>
+    </div>
+  </header>
+
+  <main id="app-content"></main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>🛡️ SafeClick &mdash; Educație în siguranța online</span>
+      <div class="footer-links">
+        <a href="#" onclick="navigateTo('contact'); return false;">Contact</a>
+        <a href="#" onclick="navigateTo('ghiduri'); return false;">Ghiduri</a>
+      </div>
+      <span>© 2025 SafeClick</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
